@@ -15,6 +15,9 @@ __pypackages__/
 # IntelliJ
 .idea
 
+# image
+image/
+
 # Celery stuff
 celerybeat-schedule
 celerybeat.pid
@@ -54,3 +57,6 @@ dmypy.json
 
 # Cython debug symbols
 ~
+
+# pycache
+*.pyc
