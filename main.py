@@ -18,7 +18,7 @@ contract_addresses = {
 
 t_0 = time.time()
 assets = []
-for n in range(186, 200):
+for n in range(0, 200):
     kwargs = {
         "asset_contract_address": contract_addresses.get("cryptopunks"),
         "token_ids": list(range(n*50, (n+1)*50)),
@@ -47,3 +47,32 @@ for n in assets_frame.index:
     asset_id = assets_frame.loc[n, "id"]
     for trait in assets_frame.loc[n, "traits"]:
         traits.append([asset_id, f'{trait.get("trait_type")}{trait.get("value")}'])
+
+
+traits = []
+trait_key = set()
+for n in range(assets.shape[0]):
+    for t in assets.loc[n, 'traits']:
+        if t["value"] not in trait_key:
+            trait_key.add(t["value"])
+            traits.append(t)
+
+print(len(traits))
+
+
+
+traits_vk = {}
+for n in range(traits.shape[0]):
+    traits_vk[traits.loc[n, "value"]] = traits.loc[n, "trait_id"]
+
+traits_rel = []
+for n in range(assets.shape[0]):
+    for t in assets.loc[n, 'traits']:
+        traits_rel.append([
+            assets.loc[n, "token_id"],
+            t["value"],
+            traits_vk[t["value"]],
+            assets.loc[n, "image_url"]
+        ])
+
+for n in

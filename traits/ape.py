@@ -4,6 +4,10 @@ from .face import Face
 
 class Ape(Face):
 
+    def __init__(self):
+        super().__init__()
+        self.face_type = "Ape"
+
     def get_contour_pos(self):
         return [
             [5, 6, 8, 15],
@@ -39,3 +43,34 @@ class Ape(Face):
             [17, 20, 9, 16],
             [20, 21, 10, 15]
         ]
+
+    def get_eyebrow_pos(self):
+        return [
+            [11, 12, 9, 11],
+            [11, 12, 14, 16],
+        ]
+
+    def get_eyeball_pos(self):
+        return [
+            [12, 13, 9, 11],
+            [12, 13, 14, 16]
+        ]
+
+    def get_eye_pos(self):
+        return [
+            [12, 13, 9, 10],
+            [12, 13, 14, 15]
+        ]
+
+    def get_nose_pos(self):
+        return [
+            [15, 16, 11, 12],
+            [15, 16, 13, 14]
+        ]
+
+    def get_mouth_pos(self):
+        return [
+            [18, 19, 10, 15]
+        ]
+
+

@@ -4,6 +4,10 @@ from .face import Face
 
 class Female(Face):
 
+    def __init__(self):
+        super().__init__()
+        self.face_type = "Female"
+
     def get_contour_pos(self):
         return [
             [7, 8, 9, 15],
@@ -32,8 +36,37 @@ class Female(Face):
             [21, 24, 9, 12]
         ]
 
-    # def get_inside_face_pos(self):
-    #     return [
-    #         [9, 10, 9, 10]
-    #     ]
+    def get_inside_face_pos(self):
+        return [
+            [9, 10, 9, 10]
+        ]
+
+    def get_eyebrow_pos(self):
+        return [
+            [12, 13, 9, 11],
+            [12, 13, 14, 16],
+        ]
+
+    def get_eyeball_pos(self):
+        return [
+            [13, 14, 9, 11],
+            [13, 14, 14, 16]
+        ]
+
+    def get_eye_pos(self):
+        return [
+            [13, 14, 9, 10],
+            [13, 14, 14, 15]
+        ]
+
+    def get_nose_pos(self):
+        return [
+            [16, 17, 12, 13]
+        ]
+
+    def get_mouth_pos(self):
+        return [
+            [18, 19, 11, 14]
+        ]
+
 

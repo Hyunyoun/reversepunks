@@ -4,6 +4,10 @@ from .face import Face
 
 class Alien(Face):
 
+    def __init__(self):
+        super().__init__()
+        self.face_type = "Alien"
+
     def get_contour_pos(self):
         return [
             [5, 6, 8, 15],
@@ -35,3 +39,34 @@ class Alien(Face):
         return [
             [12, 13, 6, 7]
         ]
+
+    def get_eyebrow_pos(self):
+        return [
+        ]
+
+    def get_eyeball_pos(self):
+        return [
+            [11, 13, 9, 11],
+            [11, 13, 14, 16]
+        ]
+
+    def get_eye_pos(self):
+        return [
+            [11, 12, 10, 11],
+            [12, 13, 9, 10],
+            [11, 12, 15, 16],
+            [12, 13, 14, 15]
+        ]
+
+    def get_nose_pos(self):
+        return [
+            [14, 15, 12, 13],
+            [15, 16, 12, 13],
+            [16, 17, 12, 13]
+        ]
+
+    def get_mouth_pos(self):
+        return [
+            [18, 19, 10, 15]
+        ]
+
