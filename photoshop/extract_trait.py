@@ -234,9 +234,10 @@ trait_ids = traits["trait_id"].tolist()
 image_dir = "image/original_image"
 save_dir = "image/trait/candidate"
 
-
+shadow_colors = {}
+eyeball_colors = {}
 # for trait_id in trait_ids[10:]:
-for trait_id in [86]:
+for trait_id in [9]:
     value = traits[traits.trait_id == trait_id].iloc[0]["value"]
     value_r = value.replace(" ", "")
     tmp_save_dir = os.path.join(save_dir, value_r)
@@ -260,6 +261,16 @@ for trait_id in [86]:
         filepath = os.path.join(image_dir, filename)
         with Image.open(filepath) as img:
             img_array = np.array(img.convert("RGBA"))
+        # color = to_hex(img_array[pos[0][0] * 14, pos[0][2] * 14])
+        # if color in shadow_colors:
+        #     shadow_colors[color].append(token_id)
+        # else:
+        #     shadow_colors[color] = [token_id]
+        # color = to_hex(img_array[pos[2][0] * 14, pos[2][2] * 14])
+        # if color in eyeball_colors:
+        #     eyeball_colors[color].append(token_id)
+        # else:
+        #     eyeball_colors[color] = [token_id]
         # component_types = ["Eyes", "Eyeballs", "Eyebrows", "Nose", "Lip"]
         comp = face.extract_component(img_array, pos)
         savefilepath = os.path.join(tmp_save_dir, f"{face_type}{value.replace(' ', '')}{token_id}.png")
@@ -279,13 +290,15 @@ for filename in onlyfiles:
     os.rename(os.path.join(DIR, filename), os.path.join(DIR, newfilename))
 
 
-value = "Vape"
+value = "Shadow Beard"
 value_r = value.replace(" ", "")
 trait = call_trait(value)
 # tmp_save_dir = os.path.join(save_dir, value)
 
-face_type = "Male"
-token_id = 9836
+skin_color = "Brownie"
+face = Male()
+face_type = face.face_type
+token_id = 2112
 filename = f"cryptopunk{token_id}.png"
 filepath = os.path.join(image_dir, filename)
 with Image.open(filepath) as img:
@@ -295,19 +308,25 @@ poslist = trait.get_pos(face_type)
 new_img_array = np.tile(face.TRANSPARENT_COLOR, (face.WIDTH, face.HEIGHT, 1))
 # pos = poslist[0]
 # color = img_array[pos[1] * 14 - 1, pos[3] * 14 - 1]
-for pos in poslist[:-4]:
+for pos in poslist:
     color = img_array[pos[0] * 14, pos[2] * 14]
+    # color = np.array([146, 34, 9, 38])
     new_img_array[pos[0] * face.PIXEL_PER_DOT:pos[1] * face.PIXEL_PER_DOT, pos[2] * face.PIXEL_PER_DOT:pos[3] * face.PIXEL_PER_DOT] = color
-
-
-for pos in poslist[-4:]:
-    color = np.array([185, 185, 185, 128])
-    new_img_array[pos[0] * face.PIXEL_PER_DOT:pos[1] * face.PIXEL_PER_DOT, pos[2] * face.PIXEL_PER_DOT:pos[3] * face.PIXEL_PER_DOT] = color
-
 
 savefilepath = os.path.join(save_dir, f"{face_type}{value_r}.png")
 comp = Image.fromarray(new_img_array.astype(np.uint8), 'RGBA')
 comp.save(savefilepath)
+
+
+for pos in poslist[:9]:
+    color = img_array[pos[0] * 14, pos[2] * 14]
+    new_img_array[pos[0] * face.PIXEL_PER_DOT:pos[1] * face.PIXEL_PER_DOT, pos[2] * face.PIXEL_PER_DOT:pos[3] * face.PIXEL_PER_DOT] = color
+
+
+for pos in poslist[9:]:
+    color = np.array([0, 0, 0, 145])
+    new_img_array[pos[0] * face.PIXEL_PER_DOT:pos[1] * face.PIXEL_PER_DOT, pos[2] * face.PIXEL_PER_DOT:pos[3] * face.PIXEL_PER_DOT] = color
+
 
 
 old = ["Brown", "Milk", "Pink", "Yellow"]
@@ -375,4 +394,13 @@ for pos in poslist:
 
 savefilepath = os.path.join(save_dir, f"{face_type}{value_r}.png")
 comp = Image.fromarray(new_img_array.astype(np.uint8), 'RGBA')
+comp.save(savefilepath)
+
+filename = f"cryptopunk{token_id}.png"
+filepath = os.path.join(save_dir, filename)
+with Image.open(filepath) as img:
+    img_array = np.array(img.convert("RGBA"))
+
+savefilepath = os.path.join(save_dir, f"NZombieFace.png")
+comp = Image.fromarray(img_array.astype(np.uint8), 'RGBA')
 comp.save(savefilepath)

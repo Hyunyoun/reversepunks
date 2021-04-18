@@ -59,7 +59,7 @@ class SilverChain(Neck):
             ]
         else:
             return [
-                [22, 23, 9, 12]
+                [22, 23, 7, 10]
             ]
 
 
